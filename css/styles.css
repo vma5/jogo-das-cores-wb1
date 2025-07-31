@@ -1,0 +1,106 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+    margin: 0;
+}
+
+.game-container {
+    text-align: center;
+    background-color: #971a1a;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #0b0a0a;
+}
+
+.start-screen, .end-screen {
+    margin-top: 2rem;
+}
+
+.start-screen input {
+    padding: 0.5rem;
+    margin-right: 0.5rem;
+    border: 1px solid #0a0909;
+    border-radius: 5px;
+}
+
+button {
+    padding: 0.5rem 1rem;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0e8c14;
+}
+
+.game-info {
+    display: flex;
+    justify-content: space-around;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.game-area {
+    margin-top: 1rem;
+}
+
+#color-to-click {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 10px;
+    width: 400px; 
+    height: 400px; 
+    margin: 0 auto;
+}
+
+
+.square {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: transform 0.1s ease;
+}
+
+.square:hover {
+    transform: scale(1.05);
+}
+
+#ranking-container {
+    margin-top: 2rem;
+}
+
+#ranking-list {
+    list-style-position: inside;
+    padding: 0;
+    text-align: left;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+#ranking-list li {
+    background-color: #f9f9f9;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+}
