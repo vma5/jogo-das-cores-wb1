@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Variáveis do jogo
     let score = 0;
-    let timeLeft = 20; 
+    let timeLeft = 25; 
     let timer;
     let playerName = '';
     
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
         gameArea.style.display = 'block';
 
         score = 0;
-        timeLeft = 15; // Reinicia o tempo para 15
+        timeLeft = 25; 
         updateScore();
         updateTimer();
         colorGrid.innerHTML = '';
@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
         showRanking();
     };
 
-    // BÔNUS: Ranking
+    // Ranking
     const saveScore = (name, finalScore) => {
         let ranking = JSON.parse(localStorage.getItem('ranking')) || [];
         ranking.push({ name, score: finalScore });
