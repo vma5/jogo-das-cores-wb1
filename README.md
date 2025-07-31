@@ -33,7 +33,7 @@ O jogo "Desafio das Cores" consiste em clicar no quadrado que corresponde à cor
 
 1. Clone o repositório para a sua máquina local.
 git clone https://github.com/vma5/jogo-das-cores-wb1.git 
-2. Abra o arquivo `index.html` em seu navegador web (Google Chrome, Firefox, etc.).
+2. Abra o arquivo `index.html` em seu navegador web.
 3. O jogo estará pronto para ser jogado.
 
 ### Créditos
