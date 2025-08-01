@@ -2,10 +2,6 @@
 
 # Desafio das Cores
 
-Um jogo simples para testar a sua velocidade de reação e reconhecimento de cores, construído com HTML, CSS e JavaScript.
-
-### Meu nome completo
-
 Victor Martins Almeida
 
 ### Regras do Jogo
