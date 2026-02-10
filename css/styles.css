@@ -1,106 +1,137 @@
+/* Configurações Gerais */
+:root {
+    --bg-color: #1a1a2e;
+    --card-bg: #16213e;
+    --text-color: #e94560;
+    --white: #ffffff;
+    --accent: #0f3460;
+}
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Substitua o link abaixo pela sua opção favorita */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                      url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1920&q=80');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* A imagem não rola com a página */
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #f0f0f0;
     margin: 0;
 }
 
-.game-container {
-    text-align: center;
-    background-color: #fafafa;
+#game-container {
+    background-color: var(--card-bg);
     padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    width: 90%;
+    max-width: 500px;
 }
 
-h1 {
-    color: #0b0a0a;
+/* Telas */
+.screen {
+    display: block;
 }
 
-.start-screen, .end-screen {
-    margin-top: 2rem;
+#game-info, #game-area, #end-screen, #ranking-container {
+    display: none; /* Controlado pelo JS */
 }
 
-.start-screen input {
-    padding: 0.5rem;
-    margin-right: 0.5rem;
-    border: 1px solid #0a0909;
-    border-radius: 5px;
+/* Inputs e Botões */
+input[type="text"] {
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    width: 80%;
+    margin-bottom: 20px;
+    font-size: 1rem;
 }
 
 button {
-    padding: 0.5rem 1rem;
-    background-color: #4CAF50;
+    background-color: var(--text-color);
     color: white;
     border: none;
-    border-radius: 5px;
+    padding: 12px 25px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 8px;
     cursor: pointer;
-    font-size: 1rem;
-    transition: background-color 0.3s;
+    transition: transform 0.2s, background-color 0.2s;
 }
 
 button:hover {
-    background-color: #0e8c14;
+    background-color: #ff6b81;
+    transform: scale(1.05);
 }
 
-.game-info {
-    display: flex;
+/* Info do Jogo (Score e Timer) */
+#game-info {
     justify-content: space-around;
+    margin-bottom: 20px;
     font-size: 1.2rem;
-    margin-bottom: 1rem;
-}
-
-.game-area {
-    margin-top: 1rem;
+    font-weight: bold;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 10px;
 }
 
 #color-to-click {
     font-size: 1.5rem;
-    font-weight: bold;
+    margin-bottom: 20px;
+    color: #00d4ff;
+    text-shadow: 1px 1px 2px black;
 }
 
-.grid {
+/* Grade de Cores */
+#color-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); 
+    grid-template-columns: repeat(4, 1fr); /* 4 colunas */
     gap: 10px;
-    width: 400px; 
-    height: 400px; 
     margin: 0 auto;
 }
 
-
 .square {
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
+    aspect-ratio: 1 / 1; /* Mantém o quadrado perfeito */
     border-radius: 8px;
-    transition: transform 0.1s ease;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.1s;
+    border: 3px solid rgba(255, 255, 255, 0.1);
 }
 
 .square:hover {
-    transform: scale(1.05);
+    opacity: 0.8;
+    transform: scale(0.95);
 }
 
+.square:active {
+    transform: scale(0.9);
+}
+
+/* Ranking */
 #ranking-container {
-    margin-top: 2rem;
+    margin-top: 30px;
+    text-align: left;
+    background: var(--accent);
+    padding: 15px;
+    border-radius: 10px;
 }
 
 #ranking-list {
-    list-style-position: inside;
+    list-style: none;
     padding: 0;
-    text-align: left;
-    max-width: 300px;
-    margin: 0 auto;
 }
 
 #ranking-list li {
-    background-color: #f9f9f9;
-    padding: 0.5rem;
-    margin-bottom: 0.5rem;
-    border-radius: 5px;
     display: flex;
     justify-content: space-between;
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#ranking-list span {
+    color: var(--text-color);
+    font-weight: bold;
 }

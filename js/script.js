@@ -18,14 +18,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Variáveis do jogo
     let score = 0;
-    let timeLeft = 25; 
+    let timeLeft = 30; 
     let timer;
     let playerName = '';
     
-    // 
-    const colors = ['red', 'green', 'blue', 'yellow', 'purple', 'orange', 'cyan', 'magenta'];
+    // --- CORREÇÃO AQUI: Dicionário de Cores ---
+    // O nome da esquerda é o que aparece para o jogador.
+    // O código da direita (#...) é o que o navegador usa para pintar o quadrado.
+    const colorsMap = {
+        'Vermelho': '#FF0000',
+        'Verde': '#008000',
+        'Azul': '#0000FF',
+        'Amarelo': '#FFFF00',
+        'Roxo': '#800080',
+        'Laranja': '#FFA500',
+        'Ciano': '#00FFFF',
+        'Rosa': '#FFC0CB'
+    };
+
+    // Pegamos apenas os nomes em português para a lógica do sorteio
+    const colors = Object.keys(colorsMap);
     
-    // Aumentado o tamanho da grade para 4x4 = 16
     const gridSize = 16; 
     let currentColorToClick = '';
 
@@ -52,12 +65,11 @@ document.addEventListener('DOMContentLoaded', () => {
         gameArea.style.display = 'block';
 
         score = 0;
-        timeLeft = 25; 
+        timeLeft = 30; 
         updateScore();
         updateTimer();
         colorGrid.innerHTML = '';
         
-        // Crie os quadrados e adicione o evento de clique
         for (let i = 0; i < gridSize; i++) {
             const square = document.createElement('div');
             square.classList.add('square');
@@ -71,43 +83,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Função para gerar uma nova rodada
     const generateNewRound = () => {
-        // Embaralha as cores
         const shuffledColors = [...colors];
         shuffleArray(shuffledColors);
 
-        // Seleciona uma cor aleatória para ser o alvo
+        // Seleciona uma cor alvo aleatória
         const colorIndex = Math.floor(Math.random() * colors.length);
         currentColorToClick = colors[colorIndex];
+        
+        // Exibe o nome em PORTUGUÊS para o jogador
         colorToClickDisplay.textContent = `Clique na cor: ${currentColorToClick}`;
 
-        // Aplica as cores aos quadrados
         const squares = document.querySelectorAll('.square');
         squares.forEach((square, index) => {
-            // Garante que a grade tenha cores suficientes para preencher
-            square.style.backgroundColor = shuffledColors[index % shuffledColors.length];
-            square.setAttribute('data-color', shuffledColors[index % shuffledColors.length]);
+            const colorNamePT = shuffledColors[index % shuffledColors.length];
+            
+            // --- AJUSTE TÉCNICO ---
+            // Pintamos com o valor hexadecimal do dicionário
+            square.style.backgroundColor = colorsMap[colorNamePT];
+            // Guardamos o nome em PT para conferir o clique depois
+            square.setAttribute('data-color', colorNamePT);
         });
     };
 
-    // Lida com o clique nos quadrados
     const handleSquareClick = (event) => {
         const clickedColor = event.target.getAttribute('data-color');
 
         if (clickedColor === currentColorToClick) {
-            score += 5; // Recompensa menor por acerto
+            score += 5; 
         } else {
-            score -= 10; // Penalidade maior por erro
+            score -= 10; 
         }
         updateScore();
         generateNewRound();
     };
 
-    // Atualiza a pontuação na tela
     const updateScore = () => {
         scoreDisplay.textContent = score;
     };
 
-    // Inicia o cronômetro
     const startTimer = () => {
         timer = setInterval(() => {
             timeLeft--;
@@ -118,12 +131,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 1000);
     };
 
-    // Atualiza o cronômetro na tela
     const updateTimer = () => {
         timerDisplay.textContent = `${timeLeft}s`;
     };
 
-    // Função para finalizar o jogo
     const endGame = () => {
         clearInterval(timer);
         gameInfo.style.display = 'none';
@@ -137,7 +148,6 @@ document.addEventListener('DOMContentLoaded', () => {
         showRanking();
     };
 
-    // Ranking
     const saveScore = (name, finalScore) => {
         let ranking = JSON.parse(localStorage.getItem('ranking')) || [];
         ranking.push({ name, score: finalScore });
@@ -153,13 +163,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const li = document.createElement('li');
             li.textContent = `${index + 1}. ${player.name}`;
             const scoreSpan = document.createElement('span');
-            scoreSpan.textContent = `Pontuação: ${player.score}`;
+            scoreSpan.textContent = ` - Pontuação: ${player.score}`;
             li.appendChild(scoreSpan);
             rankingList.appendChild(li);
         });
     };
 
-    // Event Listeners
     startButton.addEventListener('click', startGame);
     playAgainButton.addEventListener('click', () => {
         startScreen.style.display = 'block';
@@ -167,7 +176,6 @@ document.addEventListener('DOMContentLoaded', () => {
         rankingContainer.style.display = 'none';
     });
 
-    // Ao carregar a página, mostra o ranking, se houver
     if (localStorage.getItem('ranking')) {
         showRanking();
     }
